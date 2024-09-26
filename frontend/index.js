@@ -9,6 +9,10 @@ function sanitizeHTML(html) {
     return temp.innerHTML;
 }
 
+function formatText(command) {
+    document.execCommand(command, false, null);
+}
+
 async function loadCategories() {
     const categories = await backend.getCategories();
     const categoryList = document.getElementById('category-list');

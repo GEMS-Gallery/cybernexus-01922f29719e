@@ -81,6 +81,23 @@ input[type="text"], .rich-editor {
     color: #888;
 }
 
+.rich-text-toolbar {
+    margin-bottom: 5px;
+}
+
+.rich-text-toolbar button {
+    background-color: #000000;
+    color: #00ff00;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.rich-text-toolbar button:hover {
+    background-color: #333333;
+}
+
 button {
     background-color: #000000;
     color: #00ff00;

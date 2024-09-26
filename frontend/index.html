@@ -21,6 +21,11 @@
             <div id="new-post-form" style="display: none;">
                 <h3>Cr34t3 N3w P0st</h3>
                 <input type="text" id="post-title" placeholder="T1tl3">
+                <div class="rich-text-toolbar">
+                    <button onclick="formatText('bold')"><b>B</b></button>
+                    <button onclick="formatText('italic')"><i>I</i></button>
+                    <button onclick="formatText('underline')"><u>U</u></button>
+                </div>
                 <div id="post-content" class="rich-editor" contenteditable="true" placeholder="C0nt3nt"></div>
                 <input type="text" id="post-author" placeholder="4uth0r">
                 <button id="submit-post">Subm1t P0st</button>
@@ -31,6 +36,11 @@
             <div id="comment-list"></div>
             <div id="new-comment-form">
                 <h3>4dd C0mm3nt</h3>
+                <div class="rich-text-toolbar">
+                    <button onclick="formatText('bold')"><b>B</b></button>
+                    <button onclick="formatText('italic')"><i>I</i></button>
+                    <button onclick="formatText('underline')"><u>U</u></button>
+                </div>
                 <div id="comment-content" class="rich-editor" contenteditable="true" placeholder="Y0ur c0mm3nt"></div>
                 <input type="text" id="comment-author" placeholder="4uth0r">
                 <button id="submit-comment">Subm1t C0mm3nt</button>
