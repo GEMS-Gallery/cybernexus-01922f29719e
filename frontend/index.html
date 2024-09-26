@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Forum</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1>Hacker Forum</h1>
+    </header>
+    <main>
+        <section id="categories">
+            <h2>Categories</h2>
+            <ul id="category-list"></ul>
+        </section>
+        <section id="posts">
+            <h2>Posts</h2>
+            <div id="post-list"></div>
+            <div id="new-post-form" style="display: none;">
+                <h3>Create New Post</h3>
+                <input type="text" id="post-title" placeholder="Title">
+                <textarea id="post-content" placeholder="Content"></textarea>
+                <input type="text" id="post-author" placeholder="Author">
+                <button id="submit-post">Submit Post</button>
+            </div>
+        </section>
+        <section id="comments" style="display: none;">
+            <h2>Comments</h2>
+            <div id="comment-list"></div>
+            <div id="new-comment-form">
+                <h3>Add Comment</h3>
+                <textarea id="comment-content" placeholder="Your comment"></textarea>
+                <input type="text" id="comment-author" placeholder="Author">
+                <button id="submit-comment">Submit Comment</button>
+            </div>
+        </section>
+    </main>
+    <script type="module" src="index.js"></script>
+</body>
+</html>
