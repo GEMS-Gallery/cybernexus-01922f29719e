@@ -62,13 +62,23 @@ li.active {
     margin-bottom: 1rem;
 }
 
-input[type="text"], textarea {
+input[type="text"], .rich-editor {
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
     background-color: #e0e0e0;
     border: 1px solid #000000;
     color: #000000;
+}
+
+.rich-editor {
+    min-height: 100px;
+    overflow-y: auto;
+}
+
+.rich-editor:empty:before {
+    content: attr(placeholder);
+    color: #888;
 }
 
 button {

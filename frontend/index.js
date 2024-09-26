@@ -3,6 +3,12 @@ import { backend } from 'declarations/backend';
 let selectedCategory = '';
 let selectedPostId = 0;
 
+function sanitizeHTML(html) {
+    const temp = document.createElement('div');
+    temp.textContent = html;
+    return temp.innerHTML;
+}
+
 async function loadCategories() {
     const categories = await backend.getCategories();
     const categoryList = document.getElementById('category-list');
@@ -28,9 +34,9 @@ async function loadPosts(category) {
         const postDiv = document.createElement('div');
         postDiv.className = 'post';
         postDiv.innerHTML = `
-            <h4>${post.title}</h4>
-            <p>${post.content}</p>
-            <p>4uth0r: ${post.author}</p>
+            <h4>${sanitizeHTML(post.title)}</h4>
+            <div>${post.content}</div>
+            <p>4uth0r: ${sanitizeHTML(post.author)}</p>
             <p>P0st3d: ${new Date(Number(post.timestamp) / 1000000).toLocaleString()}</p>
         `;
         postDiv.addEventListener('click', () => loadComments(post.id));
@@ -48,8 +54,8 @@ async function loadComments(postId) {
         const commentDiv = document.createElement('div');
         commentDiv.className = 'comment';
         commentDiv.innerHTML = `
-            <p>${comment.content}</p>
-            <p>4uth0r: ${comment.author}</p>
+            <div>${comment.content}</div>
+            <p>4uth0r: ${sanitizeHTML(comment.author)}</p>
             <p>P0st3d: ${new Date(Number(comment.timestamp) / 1000000).toLocaleString()}</p>
         `;
         commentList.appendChild(commentDiv);
@@ -59,24 +65,24 @@ async function loadComments(postId) {
 
 document.getElementById('submit-post').addEventListener('click', async () => {
     const title = document.getElementById('post-title').value;
-    const content = document.getElementById('post-content').value;
+    const content = document.getElementById('post-content').innerHTML;
     const author = document.getElementById('post-author').value;
     if (title && content && author) {
-        await backend.createPost(selectedCategory, title, content, author);
+        await backend.createPost(selectedCategory, sanitizeHTML(title), content, sanitizeHTML(author));
         loadPosts(selectedCategory);
         document.getElementById('post-title').value = '';
-        document.getElementById('post-content').value = '';
+        document.getElementById('post-content').innerHTML = '';
         document.getElementById('post-author').value = '';
     }
 });
 
 document.getElementById('submit-comment').addEventListener('click', async () => {
-    const content = document.getElementById('comment-content').value;
+    const content = document.getElementById('comment-content').innerHTML;
     const author = document.getElementById('comment-author').value;
     if (content && author) {
-        await backend.createComment(selectedPostId, content, author);
+        await backend.createComment(selectedPostId, content, sanitizeHTML(author));
         loadComments(selectedPostId);
-        document.getElementById('comment-content').value = '';
+        document.getElementById('comment-content').innerHTML = '';
         document.getElementById('comment-author').value = '';
     }
 });
