@@ -10,7 +10,11 @@ async function loadCategories() {
     categories.forEach(category => {
         const li = document.createElement('li');
         li.textContent = category;
-        li.addEventListener('click', () => loadPosts(category));
+        li.addEventListener('click', () => {
+            document.querySelectorAll('#category-list li').forEach(el => el.classList.remove('active'));
+            li.classList.add('active');
+            loadPosts(category);
+        });
         categoryList.appendChild(li);
     });
 }
@@ -26,8 +30,8 @@ async function loadPosts(category) {
         postDiv.innerHTML = `
             <h4>${post.title}</h4>
             <p>${post.content}</p>
-            <p>Author: ${post.author}</p>
-            <p>Posted: ${new Date(Number(post.timestamp) / 1000000).toLocaleString()}</p>
+            <p>4uth0r: ${post.author}</p>
+            <p>P0st3d: ${new Date(Number(post.timestamp) / 1000000).toLocaleString()}</p>
         `;
         postDiv.addEventListener('click', () => loadComments(post.id));
         postList.appendChild(postDiv);
@@ -45,8 +49,8 @@ async function loadComments(postId) {
         commentDiv.className = 'comment';
         commentDiv.innerHTML = `
             <p>${comment.content}</p>
-            <p>Author: ${comment.author}</p>
-            <p>Posted: ${new Date(Number(comment.timestamp) / 1000000).toLocaleString()}</p>
+            <p>4uth0r: ${comment.author}</p>
+            <p>P0st3d: ${new Date(Number(comment.timestamp) / 1000000).toLocaleString()}</p>
         `;
         commentList.appendChild(commentDiv);
     });
