@@ -72,11 +72,15 @@ document.getElementById('submit-post').addEventListener('click', async () => {
     const content = document.getElementById('post-content').innerHTML;
     const author = document.getElementById('post-author').value;
     if (title && content && author) {
-        await backend.createPost(selectedCategory, sanitizeHTML(title), content, sanitizeHTML(author));
-        loadPosts(selectedCategory);
-        document.getElementById('post-title').value = '';
-        document.getElementById('post-content').innerHTML = '';
-        document.getElementById('post-author').value = '';
+        try {
+            await backend.createPost(selectedCategory, sanitizeHTML(title), content, sanitizeHTML(author));
+            loadPosts(selectedCategory);
+            document.getElementById('post-title').value = '';
+            document.getElementById('post-content').innerHTML = '';
+            document.getElementById('post-author').value = '';
+        } catch (error) {
+            console.error('Error adding post:', error);
+        }
     }
 });
 
@@ -84,10 +88,14 @@ document.getElementById('submit-comment').addEventListener('click', async () => 
     const content = document.getElementById('comment-content').innerHTML;
     const author = document.getElementById('comment-author').value;
     if (content && author) {
-        await backend.createComment(selectedPostId, content, sanitizeHTML(author));
-        loadComments(selectedPostId);
-        document.getElementById('comment-content').innerHTML = '';
-        document.getElementById('comment-author').value = '';
+        try {
+            await backend.createComment(selectedPostId, content, sanitizeHTML(author));
+            loadComments(selectedPostId);
+            document.getElementById('comment-content').innerHTML = '';
+            document.getElementById('comment-author').value = '';
+        } catch (error) {
+            console.error('Error adding comment:', error);
+        }
     }
 });
 
